@@ -1,0 +1,34 @@
+//Chinese Remainder Theorem
+#include<bits/stdc++.h>
+using namespace std;
+int x,y,GCD;
+void ExtendedEuclideanGCD(int a,int b){
+    if(b==0){
+        x=1;
+        y=0;
+        GCD=a;
+        return;
+    }
+    ExtendedEuclideanGCD(b,a%b);
+    int cx,cy;
+    cx=y;
+    cy=x-(a/b)*y;
+    x=cx;
+    y=cy;
+}
+int main(){
+    int nums[]={3,5,8};//Array of numbers
+    int rem[]={1,2,5};//Array of remainders
+   int MI=sizeof(nums)/sizeof(int);
+   int pronum=1;
+    for(int i=0;i<MI;i++){
+        pronum*=nums[i];
+    }
+    int ans=0;
+    for(int i=0;i<MI;i++){
+        int pp=(pronum/nums[i]);
+        ExtendedEuclideanGCD(pp,nums[i]);
+        ans+=rem[i]*pp*x;
+    }
+cout<<(ans+pronum)%pronum;
+}

@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+//Points To Revise
+//Ladders Top - Down Approach Just Counting All Possible Path
+
+int Ladder_Top_Down(int *dp,int k,int n) {
+    if(n==0){
+        return 1;
+    }
+   if(dp[n]!=0){
+       return dp[n];
+   }
+int ways=0;
+   for(int i=1;i<=k;i++){
+       if(n-i>=0){
+           ways+=Ladder_Top_Down(dp,k,n-i);
+       }
+   }
+
+    return dp[n]=ways;
+}
+int main(){
+    int dp[100]={0};
+    int n=4,k=3;
+   cout<< Ladder_Top_Down(dp,k,n);
+
+}
+

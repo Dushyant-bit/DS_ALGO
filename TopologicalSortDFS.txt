@@ -1,0 +1,52 @@
+//Topological Sort Using DFS
+#include<bits/stdc++.h>
+using namespace std;
+template<typename T>
+class graph{
+    map<T ,list<T>> L;
+public:
+    void addEdge(T x, T y){
+        L[x].push_back(y);
+    }
+    void dfs_helper(T src,map<T,bool>&visited,list<T> &ordering){
+        visited[src]=true;
+        for(auto nbr:L[src]){
+           if(!visited[nbr]){
+               dfs_helper(nbr,visited,ordering);
+           }
+        }
+        ordering.push_front(src);
+    return;
+    }
+    void dfs(){
+        map<T,bool> visited;
+        list<T> ordering;
+        for(auto node:L){
+            auto p=node.first;
+            visited[p]=false;
+        }
+        for(auto p:L){
+            auto src=p.first;
+            if(!visited[src]){
+            dfs_helper(src,visited,ordering);
+        }
+        }
+       for(auto x:ordering){
+        cout<<x<<endl;
+       }
+    return;
+    }
+
+};
+int main(){
+graph<string> G;
+G.addEdge("Python","DataProcessing");
+G.addEdge("Python","Pytorch");
+G.addEdge("Python","ML");
+G.addEdge("DataProcessing","ML");
+G.addEdge("Pytorch","DL");
+G.addEdge("ML","DL");
+G.addEdge("DL","FaceRecogn");
+G.addEdge("Dataset","FaceRecogn");
+G.dfs();
+}

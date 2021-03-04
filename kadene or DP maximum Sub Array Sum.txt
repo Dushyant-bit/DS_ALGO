@@ -1,0 +1,24 @@
+//DP maximum Sub array Sum
+//Kadene Algorithm
+#include<bits/stdc++.h>
+using namespace std;
+int compute(int const *arr ,int n){
+int k=0;
+k=arr[0]<0?0:arr[0];
+int maxsum=0;
+for(int i=1;i<n;i++){
+    k=arr[i]+k;
+    if(k<0){
+        k=0;
+    }
+    maxsum=max(k,maxsum);
+
+}
+return maxsum;
+}
+int main(){
+    int n[]={-3,2,5,-1,6,3,-2,7,-5,2};
+    int si=sizeof(n)/sizeof(int);
+    cout<<compute(n,si);
+}
+

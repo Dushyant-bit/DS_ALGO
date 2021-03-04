@@ -1,0 +1,65 @@
+//Topological Sort Using BFS
+#include<bits/stdc++.h>
+using namespace std;
+class graph{
+    int V;
+    list<int> *l;
+public:
+graph(int V){
+    this->V=V;
+    l=new list<int>[V];
+}
+void addEdge(int x,int y){
+    //Directed Graph
+    l[x].push_back(y);
+}
+void Topological_Sort(){
+//indegree Array
+int *indegree=new int[V];
+for(int i=0;i<V;i++){
+    //Initialize with 0
+    indegree[i]=0;
+}
+
+//Update indegree by traversing edges x->y
+//indegree[y]++
+
+for(int i=0;i<V;i++){
+    for(auto y : l[i]){
+        indegree[y]++;
+    }
+}
+//BFS
+queue<int> Q;
+//1.Step Find Nodes with 0 Indegree
+for(int i=0;i<V;i++){
+    if(indegree[i]==0){
+        Q.push(i);
+    }
+}
+//Start Removing ELement From Queue
+while(!Q.empty()){
+    int node=Q.front();
+    cout<<node<<" ";
+    Q.pop();
+    //Iterate over the neighbours of node and reduce their indegree by 1
+    for(auto nbr : l[node]){
+        indegree[nbr]--;
+if(indegree[nbr]==0){
+    Q.push(nbr);
+}
+    }
+}
+}
+};
+int main(){
+    graph G(6);
+    G.addEdge(0,2);
+    G.addEdge(1,4);
+    G.addEdge(1,2);
+    G.addEdge(2,5);
+    G.addEdge(2,3);
+    G.addEdge(3,5);
+    G.addEdge(4,5);
+    G.Topological_Sort();
+}

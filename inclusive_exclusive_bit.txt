@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    long long n;
+    cin>>n;
+    int prime[]={2,3,5,7,11,13,17,19};
+    int subset=(1<<8)-1;
+    long long ans=0;
+    for(int i=1;i<=subset;i++){
+       int set_bit=__builtin_popcount(i);
+        long long denom=1;
+        for(int j=0;j<=7;j++){
+            if(i & (1<<j)){
+                denom=denom * prime[j];
+            }
+        }
+        if(set_bit & 1){
+            ans+=n/denom;
+        }
+        else{
+            ans-=n/denom;
+        }
+
+    }
+    cout<<ans;
+    return 0;
+}

@@ -1,0 +1,12 @@
+#include<bits/stdc++.h>
+using namespace std;
+int GCD(int a,int b){
+   return b==0?a:GCD(b,a%b);
+}
+int main(){
+    int a=12,b=20;
+    int x=GCD(a,b);
+    int lcm=(a*b)/x;
+    cout<<lcm;
+    return 0;
+}

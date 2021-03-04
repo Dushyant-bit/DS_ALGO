@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+/*
+//Recursive Case
+int LCS(string s1,string s2,int i,int j){
+//Base case
+if(i==s1.length() or j==s2.length()){
+    return 0;
+}
+if(s1[i]==s2[j]){
+    return 1+LCS(s1,s2,i+1,j+1);
+}
+int op1=LCS(s1,s2,i+1,j);
+int op2=LCS(s1,s2,i,j+1);
+return max(op1,op2);
+}*/
+//DP optimization Case
+int LCS(string s1,string s2,int i,int j,vector<vector<int>>&dp){
+//Base case
+    if(i==s1.length() or j==s2.length()){
+        return 0;
+    }
+    //check if state is already computed
+    if(dp[i][j]!=-1){
+        return dp[i][j];
+    }
+    if(s1[i]==s2[j]){
+        return 1+LCS(s1,s2,i+1,j+1,dp);
+    }
+    int op1=LCS(s1,s2,i+1,j,dp);
+    int op2=LCS(s1,s2,i,j+1,dp);
+    return dp[i][j]=max(op1,op2);
+}
+int main(){
+
+    string s1="ABCD";
+    string s2="ABEDG";
+    int x1=s1.length();
+    int x2=s2.length();
+    vector<vector<int >> dp(x1 ,vector<int>(x2,-1));
+    cout<<LCS(s1,s2,0,0,dp);
+}

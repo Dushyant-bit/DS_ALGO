@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int x,y,GCD;
+void ExtendedEuclideanGCD(int a,int b){
+  if(b==0){
+      x=1;
+      y=0;
+      GCD=a;
+      return;
+  }
+  ExtendedEuclideanGCD(b,a%b);
+  int cx,cy;
+  cx=y;
+  cy=x-(a/b)*y;
+  x=cx;
+  y=cy;
+}
+int main(){
+    int a=18,b=30;
+    ExtendedEuclideanGCD(18,30);
+    cout<<x<<" "<<y<<" "<<GCD;
+    return 0;
+}

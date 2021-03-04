@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int poly_hash_string(string S){
+    int p=31,m=1e9+7;
+    int p_pow=1;
+    int hash=0;
+    for(int i=0;i<S.size();i++){
+        hash+=(p_pow*(S[i]-'a'+1));
+        p_pow*=p;
+        p_pow%=m;
+        hash%=m;
+    }
+return hash;}
+int main(){
+    string s="ababab";
+    cout<<poly_hash_string(s);
+}
